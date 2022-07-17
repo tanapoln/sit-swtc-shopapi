@@ -29,3 +29,6 @@ jobs:
 
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag ghcr.io/tanapoln/sit-swtc-shopapi:${{ github.sha }}
+
+      - name: Publish the Docker image
+        run: docker push ghcr.io/tanapoln/sit-swtc-shopapi:${{ github.sha }}
