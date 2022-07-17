@@ -22,6 +22,14 @@ public class CartController {
     @Autowired
     private CartRepository cartRepository;
 
+    public void setCartService(CartService cartService) {
+        this.cartService = cartService;
+    }
+
+    public void setCartRepository(CartRepository cartRepository) {
+        this.cartRepository = cartRepository;
+    }
+
     @PostMapping("/add")
     public AddProductResponse addProductToCart(@RequestBody(required = true) AddProductRequest request) {
         Cart cart = cartService.addProductToCart(request.getCartId(), request.getProductId());
