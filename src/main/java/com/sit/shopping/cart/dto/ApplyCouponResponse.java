@@ -8,9 +8,9 @@ public class ApplyCouponResponse {
     private boolean success;
     private String description;
 
-    public ApplyCouponResponse(Cart cart) {
-        this.success = cart.getDiscountAmount() != null && cart.getDiscountAmount().compareTo(BigDecimal.ZERO) > 0;
-        this.description = cart.getDiscountDescription();
+    public ApplyCouponResponse(String description) {
+        this.success = true;
+        this.description = description;
     }
 
     public boolean isSuccess() {
