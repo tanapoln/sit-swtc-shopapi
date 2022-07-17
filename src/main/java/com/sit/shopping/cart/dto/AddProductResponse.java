@@ -8,7 +8,7 @@ public class AddProductResponse {
 
     public AddProductResponse(Cart cart) {
         this.cartId = cart.getId();
-        this.numberOfItems = cart.getProducts().size();
+        this.numberOfItems = cart.getNumberOfItems();
     }
 
     public String getCartId() {

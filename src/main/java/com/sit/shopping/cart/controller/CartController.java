@@ -2,6 +2,7 @@ package com.sit.shopping.cart.controller;
 
 import com.sit.shopping.cart.dto.*;
 import com.sit.shopping.cart.model.Cart;
+import com.sit.shopping.cart.repository.CartRepository;
 import com.sit.shopping.cart.service.CartService;
 import com.sit.shopping.product.model.Product;
 import com.sit.shopping.product.repository.ProductRepository;
@@ -14,7 +15,7 @@ public class CartController {
     @Autowired
     private CartService cartService;
     @Autowired
-    private ProductRepository productRepository;
+    private CartRepository cartRepository;
 
     @PostMapping("/add")
     public AddProductResponse addProductToCart(@RequestBody(required = true) AddProductRequest request) {
@@ -24,12 +25,15 @@ public class CartController {
 
     @GetMapping("/status")
     public CartStatusDTO getCartStatus(@RequestParam(required = true) String cartId) {
-        return new CartStatusDTO();
+        Cart cart = cartRepository.findByCartId(cartId);
+
+        return new CartStatusDTO(cart);
     }
 
     @GetMapping("/summary")
-    public CartSummaryDTO getCartSummary(@RequestParam(required = true) String cartId) {
-        return new CartSummaryDTO();
+    public Cart getCartSummary(@RequestParam(required = true) String cartId) {
+        Cart cart = cartRepository.findByCartId(cartId);
+        return cart;
     }
 
     @PostMapping("/applyCoupon")
