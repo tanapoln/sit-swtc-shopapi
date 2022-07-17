@@ -6,4 +6,6 @@ public interface CartRepository {
     Cart createCart();
 
     Cart findByCartId(String cartId);
+
+    void save(Cart cart);
 }

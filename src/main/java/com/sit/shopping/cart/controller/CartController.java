@@ -38,6 +38,7 @@ public class CartController {
 
     @PostMapping("/applyCoupon")
     public ApplyCouponResponse applyCoupon(@RequestBody(required = true) ApplyCouponRequest request) {
-        return new ApplyCouponResponse();
+        Cart cart = cartService.applyCoupon(request.getCartId(), request.getCoupon());
+        return new ApplyCouponResponse(cart);
     }
 }

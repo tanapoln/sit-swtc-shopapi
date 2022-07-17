@@ -1,6 +1,7 @@
 package com.sit.shopping.cart.model;
 
-import com.sit.shopping.product.model.Product;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.sit.shopping.coupon.model.Coupon;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -14,9 +15,17 @@ public class Cart {
     private String discountName;
     private BigDecimal total;
 
+    @JsonIgnoreProperties
+    private String discountDescription;
+    @JsonIgnoreProperties
+    private int numberOfItems;
+
     public Cart(String id) {
         this.id = id;
         this.lineItems = new ArrayList<>();
+        this.subtotal = BigDecimal.ZERO;
+        this.total = BigDecimal.ZERO;
+        this.discountAmount = BigDecimal.ZERO;
     }
 
     public Cart() {
@@ -72,10 +81,34 @@ public class Cart {
     }
 
     public int getNumberOfItems() {
-        if (lineItems == null || lineItems.isEmpty()) {
-            return 0;
-        }
+        return numberOfItems;
+    }
 
-        return lineItems.stream().mapToInt(value -> value.getQuantity()).sum();
+    public void setNumberOfItems(int numberOfItems) {
+        this.numberOfItems = numberOfItems;
+    }
+
+    public String getDiscountDescription() {
+        return discountDescription;
+    }
+
+    public void setDiscountDescription(String discountDescription) {
+        this.discountDescription = discountDescription;
+    }
+
+    public void applyCoupon(Coupon coupon) {
+        if (coupon == null) {
+            this.setDiscountAmount(BigDecimal.ZERO);
+            this.setDiscountName(null);
+            this.setDiscountDescription(null);
+        } else {
+            this.setDiscountAmount(coupon.getDiscountAmount());
+            this.setDiscountName(coupon.getName());
+            this.setDiscountDescription(coupon.getDescription());
+        }
+    }
+
+    public void removeCoupon() {
+        this.applyCoupon(null);
     }
 }

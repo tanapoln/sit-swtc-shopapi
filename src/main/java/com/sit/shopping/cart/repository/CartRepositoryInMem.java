@@ -36,4 +36,9 @@ public class CartRepositoryInMem implements CartRepository {
 
         return cart;
     }
+
+    @Override
+    public void save(Cart cart) {
+        cartMap.put(cart.getId(), cart);
+    }
 }
