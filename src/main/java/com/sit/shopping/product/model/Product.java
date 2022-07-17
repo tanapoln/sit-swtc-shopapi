@@ -6,6 +6,17 @@ public class Product {
     private double price;
     private String imageUrl;
 
+    public Product() {
+        this.id = "generated-" + System.currentTimeMillis();
+    }
+
+    public Product(String name, double price, String imageUrl) {
+        this();
+        this.name = name;
+        this.price = price;
+        this.imageUrl = imageUrl;
+    }
+
     public String getId() {
         return id;
     }

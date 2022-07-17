@@ -123,6 +123,29 @@
 			"item": [
 				{
 					"name": "Get Products",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Expect Products\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.data.length).to.eql(1);\r",
+									"    \r",
+									"    var product = jsonData.data[0];\r",
+									"    pm.expect(product.id).to.eql(\"74aae9d2-e871-4fe6-9414-a5658978af8b\");\r",
+									"    pm.expect(product.name).to.eql(\"T-shirt\");\r",
+									"    pm.expect(product.price).to.eql(10.0);\r",
+									"    pm.expect(product.imageUrl).to.eql(\"https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/441598/item/goods_57_441598.jpg?width=1008&impolicy=quality_75\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -136,6 +159,49 @@
 							],
 							"path": [
 								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Expect Products\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    \r",
+									"    var product = jsonData;\r",
+									"    pm.expect(product.id).to.eql(\"74aae9d2-e871-4fe6-9414-a5658978af8b\");\r",
+									"    pm.expect(product.name).to.eql(\"T-shirt\");\r",
+									"    pm.expect(product.price).to.eql(10.0);\r",
+									"    pm.expect(product.imageUrl).to.eql(\"https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/441598/item/goods_57_441598.jpg?width=1008&impolicy=quality_75\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/product/{{productId}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"product",
+								"{{productId}}"
 							]
 						}
 					},

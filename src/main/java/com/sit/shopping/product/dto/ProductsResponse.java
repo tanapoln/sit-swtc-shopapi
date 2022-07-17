@@ -7,6 +7,10 @@ import java.util.List;
 public class ProductsResponse {
     private List<Product> data;
 
+    public ProductsResponse(List<Product> data) {
+        this.data = data;
+    }
+
     public List<Product> getData() {
         return data;
     }
