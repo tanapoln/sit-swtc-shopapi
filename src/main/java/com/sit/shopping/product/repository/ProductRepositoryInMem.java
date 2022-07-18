@@ -26,7 +26,7 @@ public class ProductRepositoryInMem implements ProductRepository {
         return this.products.stream()
                 .filter(product -> product.getId().equals(productId))
                 .findFirst()
-                .orElseThrow(() -> new EntityNotFoundException("Product Not Found"));
+                .orElseThrow(() -> new EntityNotFoundException("A product cannot be found"));
     }
 
     @Override

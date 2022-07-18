@@ -2,6 +2,7 @@ package com.sit.shopping.cart.repository;
 
 import com.sit.shopping.cart.model.Cart;
 import com.sit.shopping.exception.EntityNotFoundException;
+import com.sit.shopping.exception.InvalidCouponException;
 import org.springframework.stereotype.Repository;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -31,7 +32,7 @@ public class CartRepositoryInMem implements CartRepository {
         Cart cart = cartMap.get(cartId);
 
         if (cart == null) {
-            throw new EntityNotFoundException("Cart cannot be found");
+            throw new EntityNotFoundException("A cart cannot be found");
         }
 
         return cart;

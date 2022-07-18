@@ -2,6 +2,7 @@ package com.sit.shopping.coupon.repository;
 
 import com.sit.shopping.coupon.model.Coupon;
 import com.sit.shopping.exception.EntityNotFoundException;
+import com.sit.shopping.exception.InvalidCouponException;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -25,7 +26,7 @@ public class CouponRepositoryInMem implements CouponRepository {
         Coupon coupon = couponMap.get(couponCode);
 
         if (coupon == null) {
-            throw new EntityNotFoundException("Coupon cannot be found");
+            throw new InvalidCouponException();
         }
 
         return coupon;

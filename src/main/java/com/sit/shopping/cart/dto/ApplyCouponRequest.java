@@ -1,7 +1,11 @@
 package com.sit.shopping.cart.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class ApplyCouponRequest {
+    @NotNull
     private String cartId;
+    @NotNull
     private String coupon;
 
     public String getCartId() {

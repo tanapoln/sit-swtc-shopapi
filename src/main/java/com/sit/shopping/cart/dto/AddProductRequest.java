@@ -1,7 +1,11 @@
 package com.sit.shopping.cart.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class AddProductRequest {
+    @NotNull
     private String cartId;
+    @NotNull
     private String productId;
 
     public String getCartId() {
