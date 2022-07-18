@@ -16,10 +16,8 @@ public class CouponRepositoryInMem implements CouponRepository {
             couponMap = new HashMap<>();
         }
 
-        if (couponMap.get("TGIF20") == null) {
-            Coupon coupon = new Coupon("TGIF20", "Discount $20", "Get $20 discount when you order $60 minimum", "FIXED_AMOUNT", new BigDecimal("20"), new BigDecimal("60"));
-            couponMap.put(coupon.getCouponCode(), coupon);
-        }
+        Coupon coupon = new Coupon("TGIF20", "Discount $20", "Get $20 discount when you order $60 minimum", "FIXED_AMOUNT", new BigDecimal("20"), new BigDecimal("60"));
+        couponMap.putIfAbsent(coupon.getCouponCode(), coupon);
     }
 
     @Override

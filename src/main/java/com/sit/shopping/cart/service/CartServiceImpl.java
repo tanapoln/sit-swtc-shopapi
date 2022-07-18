@@ -32,7 +32,7 @@ public class CartServiceImpl implements CartService {
         try {
             cart = cartRepository.findByCartId(cartId);
         } catch (EntityNotFoundException e) {
-            cart = cartRepository.createCart();
+            cart = cartRepository.createCart(cartId);
         }
 
         List<CartItem> lineItems = cart.getLineItems();

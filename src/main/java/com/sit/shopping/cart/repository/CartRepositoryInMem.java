@@ -4,24 +4,24 @@ import com.sit.shopping.cart.model.Cart;
 import com.sit.shopping.exception.EntityNotFoundException;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 public class CartRepositoryInMem implements CartRepository {
-    private HashMap<String, Cart> cartMap;
+    private ConcurrentHashMap<String, Cart> cartMap;
 
     public CartRepositoryInMem() {
         if (cartMap == null) {
-            cartMap = new HashMap<>();
+            cartMap = new ConcurrentHashMap<>();
         }
         cartMap.putIfAbsent("ce0b9fbe-7ad8-11eb-9439-0242ac130002", new Cart("ce0b9fbe-7ad8-11eb-9439-0242ac130002"));
     }
 
     @Override
-    public Cart createCart() {
-        Cart cart = new Cart();
+    public Cart createCart(String cartId) {
+        Cart cart = new Cart(cartId);
 
-        cartMap.put(cart.getId(), cart);
+        cartMap.put(cartId, cart);
 
         return cart;
     }
