@@ -1,4 +1,4 @@
-package com.sit.shopping;
+package com.sit.shopping.exception;
 
 import com.sit.shopping.exception.EntityNotFoundException;
 import com.sit.shopping.exception.ErrorResponse;

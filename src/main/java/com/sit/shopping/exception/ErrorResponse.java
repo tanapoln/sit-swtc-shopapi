@@ -1,21 +1,19 @@
 package com.sit.shopping.exception;
 
-import org.springframework.http.HttpStatus;
-
 public class ErrorResponse {
-    private int code;
+    private String code;
     private String message;
 
     public ErrorResponse(String message, int status) {
-        this.code = status;
+        this.code = String.format("%d", status);
         this.message = message;
     }
 
-    public int getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
