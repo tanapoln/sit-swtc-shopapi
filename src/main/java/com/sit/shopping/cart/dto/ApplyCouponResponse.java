@@ -1,9 +1,5 @@
 package com.sit.shopping.cart.dto;
 
-import com.sit.shopping.cart.model.Cart;
-
-import java.math.BigDecimal;
-
 public class ApplyCouponResponse {
     private boolean success;
     private String description;

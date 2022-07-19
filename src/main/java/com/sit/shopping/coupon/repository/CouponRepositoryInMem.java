@@ -1,7 +1,6 @@
 package com.sit.shopping.coupon.repository;
 
 import com.sit.shopping.coupon.model.Coupon;
-import com.sit.shopping.exception.EntityNotFoundException;
 import com.sit.shopping.exception.InvalidCouponException;
 import org.springframework.stereotype.Repository;
 

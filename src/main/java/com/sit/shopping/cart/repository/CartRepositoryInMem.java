@@ -2,7 +2,6 @@ package com.sit.shopping.cart.repository;
 
 import com.sit.shopping.cart.model.Cart;
 import com.sit.shopping.exception.EntityNotFoundException;
-import com.sit.shopping.exception.InvalidCouponException;
 import org.springframework.stereotype.Repository;
 
 import java.util.concurrent.ConcurrentHashMap;

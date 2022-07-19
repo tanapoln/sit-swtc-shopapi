@@ -4,13 +4,8 @@ import com.sit.shopping.cart.dto.*;
 import com.sit.shopping.cart.model.Cart;
 import com.sit.shopping.cart.repository.CartRepository;
 import com.sit.shopping.cart.service.CartService;
-import com.sit.shopping.exception.ErrorResponse;
 import com.sit.shopping.exception.InvalidCouponException;
-import com.sit.shopping.product.model.Product;
-import com.sit.shopping.product.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
