@@ -29,6 +29,10 @@ public class CartRepositoryInMem implements CartRepository {
 
     @Override
     public Cart findByCartId(String cartId) {
+        if (cartId == null) {
+            throw new EntityNotFoundException("A cart cannot be found");
+        }
+
         Cart cart = cartMap.get(cartId);
 
         if (cart == null) {
@@ -40,6 +44,10 @@ public class CartRepositoryInMem implements CartRepository {
 
     @Override
     public void save(Cart cart) {
+        if (cart == null || cart.getId() == null) {
+            throw new EntityNotFoundException("A cart cannot be found");
+        }
+
         cartMap.put(cart.getId(), cart);
     }
 }
