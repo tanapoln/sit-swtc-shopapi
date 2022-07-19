@@ -21,6 +21,7 @@ public class ProductRepositoryInMem implements ProductRepository {
             this.products.add(product);
         }
     }
+
     @Override
     public Product findByProductId(String productId) {
         return this.products.stream()
