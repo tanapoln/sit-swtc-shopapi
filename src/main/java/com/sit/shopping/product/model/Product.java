@@ -9,11 +9,11 @@ public class Product {
 	private String imageUrl;
 
 	public Product() {
+		this.id = UUID.randomUUID().toString();
 	}
 
 	public static Product create(String name, double price, String imageUrl) {
 		Product product = new Product();
-		product.id = UUID.randomUUID().toString();
 		product.name = name;
 		product.price = price;
 		product.imageUrl = imageUrl;

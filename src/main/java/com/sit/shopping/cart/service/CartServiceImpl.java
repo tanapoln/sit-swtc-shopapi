@@ -26,11 +26,23 @@ public class CartServiceImpl implements CartService {
 	@Autowired
 	private CouponRepository couponRepository;
 
+	public void setProductRepository(ProductRepository productRepository) {
+		this.productRepository = productRepository;
+	}
+
+	public void setCartRepository(CartRepository cartRepository) {
+		this.cartRepository = cartRepository;
+	}
+
+	public void setCouponRepository(CouponRepository couponRepository) {
+		this.couponRepository = couponRepository;
+	}
+
 	@Override
 	public Cart addProductToCart(String cartId, String productId) {
 		Product product = productRepository.findByProductId(productId);
 
-		Cart cart = findOrCreateCart(cartId);
+		Cart cart = getCart(cartId);
 
 		List<CartItem> lineItems = cart.getLineItems();
 
@@ -70,6 +82,9 @@ public class CartServiceImpl implements CartService {
 
 		if (!StringUtils.hasText(couponCode)) {
 			cart.removeCoupon();
+
+			cartRepository.save(cart);
+
 			return cart;
 		}
 
