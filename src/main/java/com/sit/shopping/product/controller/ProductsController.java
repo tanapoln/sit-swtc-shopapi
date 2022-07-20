@@ -16,6 +16,10 @@ public class ProductsController {
     @Autowired
     private ProductRepository productRepository;
 
+    public void setProductRepository(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
     @GetMapping
     public ProductsResponse getProducts() {
         List<Product> products = productRepository.findAll();

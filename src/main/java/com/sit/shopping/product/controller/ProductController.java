@@ -14,8 +14,12 @@ public class ProductController {
     @Autowired
     private ProductRepository productRepository;
 
+    public void setProductRepository(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
     @GetMapping("/{id}")
-    public Product getProducts(@PathVariable String id) {
+    public Product getProductById(@PathVariable String id) {
         Product product = productRepository.findByProductId(id);
         return product;
     }
