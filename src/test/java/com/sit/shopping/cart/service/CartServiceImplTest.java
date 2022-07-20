@@ -136,7 +136,6 @@ class CartServiceImplTest {
 
     @Test
     void testApplyCouponFailedByUnderMinimumAmount() {
-
         String cartId = "cart-id";
         String couponCode = "coupon-code-id";
 
