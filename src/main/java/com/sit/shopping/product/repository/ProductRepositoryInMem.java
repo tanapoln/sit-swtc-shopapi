@@ -21,7 +21,7 @@ public class ProductRepositoryInMem implements ProductRepository, InitializingBe
 		this.products.add(Product.create("Loose Cropped Jeans (Damaged)", 42.57,
 				"https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/448429/sub/goods_448429_sub13"
 						+ ".jpg?width=1600&impolicy=quality_75"));
-		this.products.add(Product.create("Smart Skort Solid", 28.28,
+		this.products.add(Product.create("Smart Skort Solid", 140.37,
 				"https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/455844/sub/goods_455844_sub14"
 						+ ".jpg?width=1600&impolicy=quality_75"));
 		this.products.add(Product.create("Smart Tucked Shorts", 22.57,
