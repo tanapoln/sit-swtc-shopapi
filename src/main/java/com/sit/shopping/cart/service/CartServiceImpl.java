@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.sit.shopping.cart.model.Cart;
 import com.sit.shopping.cart.model.CartItem;
@@ -66,6 +67,11 @@ public class CartServiceImpl implements CartService {
 	@Override
 	public Cart applyCoupon(String cartId, String couponCode) {
 		Cart cart = cartRepository.findByCartId(cartId);
+
+		if (!StringUtils.hasText(couponCode)) {
+			cart.removeCoupon();
+			return cart;
+		}
 
 		Coupon coupon = couponRepository.findByCoupon(couponCode);
 
