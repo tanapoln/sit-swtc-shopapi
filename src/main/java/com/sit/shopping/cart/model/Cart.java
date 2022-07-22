@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sit.shopping.coupon.model.Coupon;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +54,7 @@ public class Cart {
     }
 
     public void setSubtotal(BigDecimal subtotal) {
-        this.subtotal = subtotal.setScale(2);
+        this.subtotal = subtotal.setScale(2, RoundingMode.HALF_UP);
     }
 
     public BigDecimal getDiscountAmount() {
@@ -61,7 +62,7 @@ public class Cart {
     }
 
     public void setDiscountAmount(BigDecimal discountAmount) {
-        this.discountAmount = discountAmount.setScale(2);
+        this.discountAmount = discountAmount.setScale(2, RoundingMode.HALF_UP);;
     }
 
     public String getDiscountName() {
@@ -77,7 +78,7 @@ public class Cart {
     }
 
     public void setTotal(BigDecimal total) {
-        this.total = total.setScale(2);
+        this.total = total.setScale(2, RoundingMode.HALF_UP);;
     }
 
     public int getNumberOfItems() {
