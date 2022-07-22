@@ -2,122 +2,10 @@
 	"info": {
 		"_postman_id": "e5081c49-ed6e-4061-99ab-c98f96a6ca80",
 		"name": "SIT-Shop-API",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10835827"
 	},
 	"item": [
-		{
-			"name": "Cart",
-			"item": [
-				{
-					"name": "Adds product to a cart",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"cartId\": \"{{cartId}}\",\r\n    \"productId\": \"74aae9d2-e871-4fe6-9414-a5658978af8b\"\r\n}"
-						},
-						"url": {
-							"raw": "{{BASE_URL}}/cart/add",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"cart",
-								"add"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Gets a cart status",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{BASE_URL}}/cart/status?cartId={{cartId}}",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"cart",
-								"status"
-							],
-							"query": [
-								{
-									"key": "cartId",
-									"value": "{{cartId}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Gets a cart summary",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{BASE_URL}}/cart/summary?cartId={{cartId}}",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"cart",
-								"summary"
-							],
-							"query": [
-								{
-									"key": "cartId",
-									"value": "{{cartId}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Lists products",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"cartId\": \"{{cartId}}\",\r\n    \"coupon\": \"TGIF20\"\r\n}"
-						},
-						"url": {
-							"raw": "{{BASE_URL}}/cart/applyCoupon",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"cart",
-								"applyCoupon"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
 		{
 			"name": "Product",
 			"item": [
@@ -133,13 +21,19 @@
 									"});\r",
 									"pm.test(\"Expect Products\", function () {\r",
 									"    var jsonData = pm.response.json();\r",
-									"    pm.expect(jsonData.data.length).to.eql(1);\r",
+									"    pm.expect(jsonData.data.length).to.eql(9);\r",
 									"    \r",
-									"    var product = jsonData.data[0];\r",
-									"    pm.expect(product.id).to.eql(\"74aae9d2-e871-4fe6-9414-a5658978af8b\");\r",
-									"    pm.expect(product.name).to.eql(\"T-shirt\");\r",
-									"    pm.expect(product.price).to.eql(10.0);\r",
-									"    pm.expect(product.imageUrl).to.eql(\"https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/441598/item/goods_57_441598.jpg?width=1008&impolicy=quality_75\");\r",
+									"    var product1 = jsonData.data[0];\r",
+									"    pm.expect(product1.id).is.not.undefined;\r",
+									"    pm.expect(product1.name).to.eql(\"Loose Cropped Jeans (Damaged)\");\r",
+									"    pm.expect(product1.price).to.eql(42.57);\r",
+									"    pm.expect(product1.imageUrl).to.eql(\"https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/448429/sub/goods_448429_sub13.jpg?width=1600&impolicy=quality_75\");\r",
+									"\r",
+									"    var product2 = jsonData.data[1];\r",
+									"    pm.expect(product2.id).is.not.undefined;\r",
+									"    pm.expect(product2.name).to.eql(\"Smart Skort Solid\");\r",
+									"    pm.expect(product2.price).to.eql(140.37);\r",
+									"    pm.expect(product2.imageUrl).to.eql(\"https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/455844/sub/goods_455844_sub14.jpg?width=1600&impolicy=quality_75\");\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -178,10 +72,10 @@
 									"    var jsonData = pm.response.json();\r",
 									"    \r",
 									"    var product = jsonData;\r",
-									"    pm.expect(product.id).to.eql(\"74aae9d2-e871-4fe6-9414-a5658978af8b\");\r",
-									"    pm.expect(product.name).to.eql(\"T-shirt\");\r",
-									"    pm.expect(product.price).to.eql(10.0);\r",
-									"    pm.expect(product.imageUrl).to.eql(\"https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/441598/item/goods_57_441598.jpg?width=1008&impolicy=quality_75\");\r",
+									"    pm.expect(product.id).is.not.undefined;\r",
+									"    pm.expect(product.name).to.eql(\"Loose Cropped Jeans (Damaged)\");\r",
+									"    pm.expect(product.price).to.eql(42.57);\r",
+									"    pm.expect(product.imageUrl).to.eql(\"https://image.uniqlo.com/UQ/ST3/AsianCommon/imagesgoods/448429/sub/goods_448429_sub13.jpg?width=1600&impolicy=quality_75\");\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -208,6 +102,377 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "Adds product to a cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Adds product to new cart should have numbertOfItems equals to 1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.numberOfItems).to.eql(1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var uuid = require('uuid');\r",
+									"var cartId = uuid.v4();\r",
+									"pm.environment.set(\"cartId\", cartId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cartId\": \"{{cartId}}\",\r\n    \"productId\": \"{{productId}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/cart/add",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"cart",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Gets a cart status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Gets new cart status should have numbertOfItems equals to 1\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.numberOfItems).to.eql(1);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/cart/status?cartId={{cartId}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"cart",
+								"status"
+							],
+							"query": [
+								{
+									"key": "cartId",
+									"value": "{{cartId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Gets a cart summary",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Cart summary with one item should calculate correctly\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    pm.expect(jsonData.id).to.eql(pm.environment.get(\"cartId\"));\r",
+									"    pm.expect(jsonData.subtotal).to.eql(42.57);\r",
+									"    pm.expect(jsonData.total).to.eql(42.57);\r",
+									"    pm.expect(jsonData.discountAmount).to.eql(0);\r",
+									"    pm.expect(jsonData.discountName).to.eql(null);\r",
+									"    pm.expect(jsonData.numberOfItems).to.eql(1);\r",
+									"    \r",
+									"    pm.expect(jsonData.lineItems.length).to.eql(1);\r",
+									"    \r",
+									"    var lineItem = jsonData.lineItems[0]\r",
+									"    pm.expect(lineItem.id).to.eql(pm.environment.get(\"productId\"))\r",
+									"    pm.expect(lineItem.name).to.eql(\"Loose Cropped Jeans (Damaged)\")\r",
+									"    pm.expect(lineItem.quantity).to.eql(1)\r",
+									"    pm.expect(lineItem.unitPrice).to.eql(42.57);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/cart/summary?cartId={{cartId}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"cart",
+								"summary"
+							],
+							"query": [
+								{
+									"key": "cartId",
+									"value": "{{cartId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Applies an invalid coupon discount",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"pm.test(\"Applys with invalid coupon should be error\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"\r",
+									"    pm.expect(jsonData.code).to.eql(\"400\");\r",
+									"    pm.expect(jsonData.message).to.eql(\"Coupon cannot be applied due to expired or invalid\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cartId\": \"{{cartId}}\",\r\n    \"coupon\": \"WRONG\"\r\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/cart/applyCoupon",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"cart",
+								"applyCoupon"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Applies a coupon discount success",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"var uuid = require('uuid');\r",
+									"var cartId = uuid.v4();\r",
+									"pm.environment.set(\"cartId\", cartId);\r",
+									"\r",
+									"pm.sendRequest(pm.environment.get(\"BASE_URL\") + \"/products\", (error, response) => {\r",
+									"    if (error) {\r",
+									"        console.log(error);\r",
+									"    } else {\r",
+									"        var products = response.json().data\r",
+									"        pm.environment.set(\"productId\", products[1].id)\r",
+									"    }\r",
+									"\r",
+									"    const createCart = {\r",
+									"        url: pm.environment.get(\"BASE_URL\") + '/cart/add',\r",
+									"        method: 'POST',\r",
+									"        header: {\r",
+									"            'Content-Type': 'application/json'\r",
+									"        },\r",
+									"        body: {\r",
+									"            mode: 'raw',\r",
+									"            raw: JSON.stringify({\r",
+									"                cartId: cartId,\r",
+									"                productId: pm.environment.get(\"productId\")\r",
+									"            })\r",
+									"        }\r",
+									"    };\r",
+									"\r",
+									"    pm.sendRequest(createCart, (error, response) => {\r",
+									"        console.log(error ? error : response.json());\r",
+									"    });\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Applys with valid coupon should be success\", function () {\r",
+									"    var jsonData = pm.response.json();\r",
+									"    \r",
+									"    pm.expect(jsonData.success).to.eql(true);\r",
+									"    pm.expect(jsonData.description).to.eql(\"Get $20 discount when you order $60 minimum\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cartId\": \"{{cartId}}\",\r\n    \"coupon\": \"TGIF20\"\r\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/cart/applyCoupon",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"cart",
+								"applyCoupon"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"var uuid = require('uuid');",
+					"var cartId = uuid.v4();",
+					"pm.environment.set(\"cartId\", cartId);",
+					"",
+					"pm.sendRequest(pm.environment.get(\"BASE_URL\") + \"/products\", (error, response) => {",
+					"  if (error) {",
+					"    console.log(error);",
+					"  } else {",
+					"      var products = response.json().data",
+					"      pm.environment.set(\"productId\", products[0].id)",
+					"  }",
+					"",
+					"    const createCart = {",
+					"        url: pm.environment.get(\"BASE_URL\") + '/cart/add',",
+					"        method: 'POST',",
+					"        header: {",
+					"            'Content-Type': 'application/json'",
+					"        },",
+					"        body: {",
+					"            mode: 'raw',",
+					"            raw: JSON.stringify({",
+					"                cartId: cartId,",
+					"                productId: pm.environment.get(\"productId\")",
+					"            })",
+					"        }",
+					"    };",
+					"",
+					"    pm.sendRequest(createCart, (error, response) => {",
+					"        console.log(error ? error : response.json());",
+					"    });",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }
