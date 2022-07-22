@@ -1,6 +1,7 @@
 package com.sit.shopping.cart.model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class CartItem {
     private String id;
@@ -12,7 +13,7 @@ public class CartItem {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
-        this.unitPrice = unitPrice;
+        this.unitPrice = unitPrice.setScale(2, RoundingMode.HALF_UP);
     }
 
     public String getId() {
@@ -44,6 +45,6 @@ public class CartItem {
     }
 
     public void setUnitPrice(BigDecimal unitPrice) {
-        this.unitPrice = unitPrice;
+        this.unitPrice = unitPrice.setScale(2, RoundingMode.HALF_UP);
     }
 }
