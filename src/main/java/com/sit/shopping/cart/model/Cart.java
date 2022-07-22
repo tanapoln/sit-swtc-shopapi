@@ -53,7 +53,7 @@ public class Cart {
     }
 
     public void setSubtotal(BigDecimal subtotal) {
-        this.subtotal = subtotal;
+        this.subtotal = subtotal.setScale(2);
     }
 
     public BigDecimal getDiscountAmount() {
@@ -61,7 +61,7 @@ public class Cart {
     }
 
     public void setDiscountAmount(BigDecimal discountAmount) {
-        this.discountAmount = discountAmount;
+        this.discountAmount = discountAmount.setScale(2);
     }
 
     public String getDiscountName() {
@@ -77,7 +77,7 @@ public class Cart {
     }
 
     public void setTotal(BigDecimal total) {
-        this.total = total;
+        this.total = total.setScale(2);
     }
 
     public int getNumberOfItems() {
