@@ -2,6 +2,8 @@ package com.sit.shopping.coupon.model;
 
 import java.math.BigDecimal;
 
+import org.springframework.util.StringUtils;
+
 public class Coupon {
     private String couponCode;
     private String name;
@@ -10,7 +12,12 @@ public class Coupon {
     private BigDecimal discountAmount;
     private BigDecimal minimumAmount;
 
-    public Coupon(String couponCode, String name, String description, String discountType, BigDecimal discountAmount, BigDecimal minimumAmount) {
+    public Coupon(String couponCode, String name, String description, String discountType, BigDecimal discountAmount,
+            BigDecimal minimumAmount) {
+        if (!StringUtils.hasText(couponCode)) {
+            throw new IllegalArgumentException("coupon code must not be empty");
+        }
+
         this.couponCode = couponCode;
         this.name = name;
         this.description = description;
