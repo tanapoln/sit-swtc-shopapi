@@ -1,10 +1,13 @@
 package com.sit.shopping.cart.controller;
 
-import java.math.BigDecimal;
-
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
+import com.sit.shopping.cart.repository.CartRepository;
+import com.sit.shopping.coupon.model.Coupon;
+import com.sit.shopping.coupon.repository.CouponRepository;
+import com.sit.shopping.product.model.Product;
+import com.sit.shopping.product.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,49 +23,57 @@ import com.sit.shopping.cart.dto.ApplyCouponRequest;
 import com.sit.shopping.cart.dto.ApplyCouponResponse;
 import com.sit.shopping.cart.dto.CartStatusDTO;
 import com.sit.shopping.cart.model.Cart;
-import com.sit.shopping.cart.service.CartService;
-import com.sit.shopping.exception.InvalidCouponException;
 
 @RestController
 @RequestMapping("/cart")
 @Validated
 public class CartController {
-	@Autowired
-	private CartService cartService;
+    @Autowired
+    private CartRepository cartRepository;
 
-	public void setCartService(CartService cartService) {
-		this.cartService = cartService;
-	}
+    @Autowired
+    private ProductRepository productRepository;
 
-	@PostMapping("/add")
-	public AddProductResponse addProductToCart(@RequestBody @Valid AddProductRequest request) {
-		Cart cart = cartService.addProductToCart(request.getCartId(), request.getProductId());
-		return new AddProductResponse(cart);
-	}
+    @Autowired
+    private CouponRepository couponRepository;
 
-	@GetMapping("/status")
-	public CartStatusDTO getCartStatus(@RequestParam @Valid @NotBlank String cartId) {
-		Cart cart = cartService.getCart(cartId);
+    @PostMapping("/add")
+    public AddProductResponse addProductToCart(@RequestBody @Valid AddProductRequest request) {
+        Product product = productRepository.findByProductId(request.getProductId());
 
-		return new CartStatusDTO(cart);
-	}
+        Cart cart = cartRepository.findOrCreateCart(request.getCartId());
 
-	@GetMapping("/summary")
-	public Cart getCartSummary(@RequestParam String cartId) {
-		Cart cart = cartService.getCart(cartId);
-		return cart;
-	}
+        cart.addProduct(product);
 
-	@PostMapping("/applyCoupon")
-	public ApplyCouponResponse applyCoupon(@RequestBody @Valid ApplyCouponRequest request) {
-		Cart cart = cartService.applyCoupon(request.getCartId(), request.getCoupon());
+        cartRepository.save(cart);
 
-		boolean isAppliedSuccess = cart.getDiscountAmount() != null && cart.getDiscountAmount().compareTo(BigDecimal.ZERO) > 0;
+        return new AddProductResponse(cart);
+    }
 
-		if (!isAppliedSuccess) {
-			throw new InvalidCouponException();
-		}
+    @GetMapping("/status")
+    public CartStatusDTO getCartStatus(@RequestParam @Valid @NotBlank String cartId) {
+        Cart cart = cartRepository.findByCartId(cartId);
 
-		return new ApplyCouponResponse(cart.getDiscountDescription());
-	}
+        return new CartStatusDTO(cart);
+    }
+
+    @GetMapping("/summary")
+    public Cart getCartSummary(@RequestParam String cartId) {
+        Cart cart = cartRepository.findByCartId(cartId);
+
+        return cart;
+    }
+
+    @PostMapping("/applyCoupon")
+    public ApplyCouponResponse applyCoupon(@RequestBody @Valid ApplyCouponRequest request) {
+        Cart cart = cartRepository.findOrCreateCart(request.getCartId());
+
+        Coupon coupon = couponRepository.findByCoupon(request.getCoupon());
+
+        coupon.applyToCart(cart);
+
+        cartRepository.save(cart);
+
+        return new ApplyCouponResponse(cart.getDiscountDescription());
+    }
 }

@@ -1,5 +1,7 @@
 package com.sit.shopping.cart.dto;
 
+import org.springframework.util.StringUtils;
+
 import javax.validation.constraints.NotNull;
 
 public class ApplyCouponRequest {

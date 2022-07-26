@@ -2,6 +2,8 @@ package com.sit.shopping.coupon.model;
 
 import java.math.BigDecimal;
 
+import com.sit.shopping.cart.model.Cart;
+import com.sit.shopping.exception.InvalidCouponException;
 import org.springframework.util.StringUtils;
 
 public class Coupon {
@@ -12,65 +14,65 @@ public class Coupon {
     private BigDecimal discountAmount;
     private BigDecimal minimumAmount;
 
-    public Coupon(String couponCode, String name, String description, String discountType, BigDecimal discountAmount,
+    public static Coupon create(String couponCode, String name, String description, String discountType, BigDecimal discountAmount,
             BigDecimal minimumAmount) {
-        if (!StringUtils.hasText(couponCode)) {
+        if (couponCode == null) {
             throw new IllegalArgumentException("coupon code must not be empty");
         }
 
-        this.couponCode = couponCode;
-        this.name = name;
-        this.description = description;
-        this.discountType = discountType;
-        this.discountAmount = discountAmount;
-        this.minimumAmount = minimumAmount;
+        Coupon coupon = new Coupon();
+        coupon.couponCode = couponCode;
+        coupon.name = name;
+        coupon.description = description;
+        coupon.discountType = discountType;
+        coupon.discountAmount = discountAmount;
+        coupon.minimumAmount = minimumAmount;
+        return coupon;
     }
 
     public String getCouponCode() {
         return couponCode;
     }
 
-    public void setCouponCode(String couponCode) {
-        this.couponCode = couponCode;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getDiscountType() {
         return discountType;
     }
 
-    public void setDiscountType(String discountType) {
-        this.discountType = discountType;
-    }
-
     public BigDecimal getDiscountAmount() {
         return discountAmount;
-    }
-
-    public void setDiscountAmount(BigDecimal discountAmount) {
-        this.discountAmount = discountAmount;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public BigDecimal getMinimumAmount() {
         return minimumAmount;
     }
 
-    public void setMinimumAmount(BigDecimal minimumAmount) {
-        this.minimumAmount = minimumAmount;
+    public boolean isEmptyCoupon() {
+        return !StringUtils.hasText(couponCode);
+    }
+
+    public void applyToCart(Cart cart) {
+        if (cart == null) {
+            throw new IllegalArgumentException("A cart must not be null");
+        }
+
+        if (isEmptyCoupon()) {
+            cart.removeCoupon();
+
+            return;
+        }
+
+        if (cart.getSubtotal().compareTo(minimumAmount) < 0) {
+            throw new InvalidCouponException();
+        }
+
+        cart.applyCoupon(this);
     }
 }

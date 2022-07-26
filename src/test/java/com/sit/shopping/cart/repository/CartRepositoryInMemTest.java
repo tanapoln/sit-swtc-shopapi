@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 class CartRepositoryInMemTest {
     private CartRepositoryInMem underTest;
@@ -34,7 +35,7 @@ class CartRepositoryInMemTest {
 
     @Test
     void testSaveCart() {
-        Cart cart = new Cart();
+        Cart cart = Cart.create(UUID.randomUUID().toString());
 
         Assertions.assertDoesNotThrow(() -> {
             underTest.save(cart);
@@ -51,8 +52,7 @@ class CartRepositoryInMemTest {
 
     @Test
     void testSaveNullCartId() {
-        Cart cart = new Cart();
-        cart.setId(null);
+        Cart cart = Cart.create(null);
 
         Assertions.assertThrows(EntityNotFoundException.class, () -> {
             underTest.save(cart);
