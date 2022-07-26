@@ -14,12 +14,12 @@ public class CartRepositoryInMem implements CartRepository {
         if (cartMap == null) {
             cartMap = new ConcurrentHashMap<>();
         }
-        cartMap.putIfAbsent("ce0b9fbe-7ad8-11eb-9439-0242ac130002", new Cart("ce0b9fbe-7ad8-11eb-9439-0242ac130002"));
+        cartMap.putIfAbsent("ce0b9fbe-7ad8-11eb-9439-0242ac130002", Cart.create("ce0b9fbe-7ad8-11eb-9439-0242ac130002"));
     }
 
     @Override
     public Cart createCart(String cartId) {
-        Cart cart = new Cart(cartId);
+        Cart cart = Cart.create(cartId);
 
         cartMap.put(cartId, cart);
 
@@ -48,5 +48,14 @@ public class CartRepositoryInMem implements CartRepository {
         }
 
         cartMap.put(cart.getId(), cart);
+    }
+
+    @Override
+    public Cart findOrCreateCart(String cartId) {
+        try {
+            return this.findByCartId(cartId);
+        } catch (EntityNotFoundException e) {
+            return this.createCart(cartId);
+        }
     }
 }

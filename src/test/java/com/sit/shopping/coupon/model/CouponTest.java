@@ -1,12 +1,12 @@
-package com.sit.shopping.cart.model;
+package com.sit.shopping.coupon.model;
 
 import org.hamcrest.CoreMatchers;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 
-class CartTest {
+class CouponTest {
     @Test
-    public void testAddProduct() {
+    public void testApplyCouponToCart() {
         MatcherAssert.assertThat(true, CoreMatchers.equalTo(true));
     }
 }
