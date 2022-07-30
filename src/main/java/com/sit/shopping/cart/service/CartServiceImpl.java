@@ -94,9 +94,11 @@ public class CartServiceImpl implements CartService {
 			cart.removeCoupon();
 		} else {
 			cart.applyCoupon(coupon);
-		}
 
-		calculate(cart);
+			BigDecimal total = cart.getSubtotal().subtract(coupon.getDiscountAmount());
+
+			cart.setTotal(total);
+		}
 
 		cartRepository.save(cart);
 
